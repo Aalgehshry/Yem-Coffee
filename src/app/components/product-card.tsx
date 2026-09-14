@@ -89,7 +89,7 @@ export function ProductCard({
             className={cn(
               'absolute bottom-3 right-3 z-10 inline-flex h-10 items-center gap-2 rounded-full',
               'bg-card/95 px-4 text-sm font-medium text-foreground shadow-md backdrop-blur',
-              'transition-all duration-300 hover:bg-copper hover:text-white',
+              'transition-all duration-300 hover:bg-cta hover:text-cta-foreground',
               // Revealed on hover for pointer users, but always visible on
               // touch screens (which never hover) and to keyboard focus.
               'md:translate-y-2 md:opacity-0',
@@ -120,7 +120,7 @@ export function ProductCard({
         <h3 className="mt-1.5 text-xl font-semibold leading-snug">
           <Link
             to={`/product/${product.id}`}
-            className="after:absolute after:inset-0 after:content-[''] hover:text-copper focus-visible:text-copper"
+            className="after:absolute after:inset-0 after:content-[''] hover:text-copper-text focus-visible:text-copper-text"
           >
             {product.name}
           </Link>
@@ -140,7 +140,7 @@ export function ProductCard({
         {/* `mt-auto` pins the price row to the bottom so prices line up across
             a row of cards even when the flavour-note chips wrap differently. */}
         <div className="mt-auto flex items-end justify-between border-t border-border/60 pt-4">
-          <span className="tabular-price text-lg font-semibold text-copper">
+          <span className="tabular-price text-lg font-semibold text-copper-text">
             {formatPrice(product.price)}
           </span>
           <span className="text-xs text-muted-foreground">

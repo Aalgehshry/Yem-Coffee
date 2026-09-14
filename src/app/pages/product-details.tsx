@@ -89,13 +89,13 @@ export function ProductDetailsPage() {
       <nav aria-label="Breadcrumb" className="mb-8">
         <ol className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
           <li>
-            <Link to="/" className="transition-colors hover:text-copper">
+            <Link to="/" className="transition-colors hover:text-copper-text">
               Home
             </Link>
           </li>
           <li aria-hidden="true">/</li>
           <li>
-            <Link to="/shop" className="transition-colors hover:text-copper">
+            <Link to="/shop" className="transition-colors hover:text-copper-text">
               Shop
             </Link>
           </li>
@@ -122,7 +122,7 @@ export function ProductDetailsPage() {
 
           <Link
             to="/shop"
-            className="mt-5 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-copper"
+            className="mt-5 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-copper-text"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Back to all coffees
@@ -131,7 +131,7 @@ export function ProductDetailsPage() {
 
         {/* ------------------------------------------------------------- Info */}
         <div className="flex flex-col">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-copper-text">
             {product.origin}
           </p>
 
@@ -140,7 +140,7 @@ export function ProductDetailsPage() {
           </h1>
 
           <div className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-            <span className="tabular-price font-display text-3xl font-semibold text-copper">
+            <span className="tabular-price font-display text-3xl font-semibold text-copper-text">
               {formatPrice(product.price)}
             </span>
             <span className="text-sm text-muted-foreground">
@@ -176,7 +176,7 @@ export function ProductDetailsPage() {
             {specs.map(({ Icon, label, value }) => (
               <div key={label} className="flex items-start gap-3">
                 <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sand">
-                  <Icon className="h-4 w-4 text-copper" aria-hidden="true" />
+                  <Icon className="h-4 w-4 text-copper-text" aria-hidden="true" />
                 </span>
                 <div>
                   <dt className="text-xs uppercase tracking-[0.1em] text-muted-foreground">
@@ -206,7 +206,7 @@ export function ProductDetailsPage() {
             <Button
               size="lg"
               onClick={handleAddToCart}
-              className="h-12 flex-1 bg-copper text-base text-white hover:bg-copper-dark"
+              className="h-12 flex-1 bg-cta text-base text-cta-foreground hover:bg-cta-hover"
             >
               <ShoppingCart className="h-5 w-5" aria-hidden="true" />
               Add to cart

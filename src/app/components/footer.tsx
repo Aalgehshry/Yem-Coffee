@@ -49,7 +49,7 @@ export function Footer() {
           {/* Brand + newsletter */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2">
-              <Coffee className="h-7 w-7 text-copper" aria-hidden="true" />
+              <Coffee className="h-7 w-7 text-highlight" aria-hidden="true" />
               <span className="font-display text-xl font-semibold">Yem Coffee</span>
             </div>
 
@@ -76,7 +76,7 @@ export function Footer() {
                   autoComplete="email"
                   className="border-deep-foreground/25 bg-deep-foreground/10 text-deep-foreground placeholder:text-deep-foreground/45"
                 />
-                <Button type="submit" className="bg-copper text-white hover:bg-copper-dark">
+                <Button type="submit" className="bg-cta text-cta-foreground hover:bg-cta-hover">
                   Subscribe
                 </Button>
               </div>
@@ -92,7 +92,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     to={link.to}
-                    className="text-deep-foreground/80 transition-colors hover:text-copper"
+                    className="text-deep-foreground/80 transition-colors hover:text-highlight"
                   >
                     {link.label}
                   </Link>
@@ -110,7 +110,7 @@ export function Footer() {
                 <li key={link.label}>
                   <Link
                     to={link.to}
-                    className="text-deep-foreground/80 transition-colors hover:text-copper"
+                    className="text-deep-foreground/80 transition-colors hover:text-highlight"
                   >
                     {link.label}
                   </Link>
@@ -126,7 +126,7 @@ export function Footer() {
                     aria-label={label}
                     rel="noreferrer noopener"
                     target="_blank"
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-deep-foreground/25 text-deep-foreground/80 transition-colors hover:border-copper hover:text-copper"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-deep-foreground/25 text-deep-foreground/80 transition-colors hover:border-highlight hover:text-highlight"
                   >
                     <Icon className="h-4 w-4" aria-hidden="true" />
                   </a>

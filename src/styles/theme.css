@@ -11,9 +11,29 @@
 :root {
   --font-size: 16px;
 
-  /* Brand -- the Yemeni coffee palette */
+  /* Brand -- the Yemeni coffee palette.
+     `--copper` is a mid-tone: it reads well as a FILL or a border, but it
+     does not clear 4.5:1 against either white or near-black at body sizes.
+     So the one job is split into three, each verified in both themes:
+       --copper        decorative fill, borders, dividers
+       --copper-text   copper used as TEXT on a page/card background
+       --cta           the solid primary button, paired with --cta-foreground */
   --copper: #b87333;
   --copper-dark: #9a5f28;
+  --copper-text: #a05b23;
+  --cta: #9a5f28;
+  --cta-foreground: #ffffff;
+  --cta-hover: #834d1d;
+
+  /* Roast chips sit on product photography, which looks identical in both
+     themes. Defined in :root ONLY -- never overridden in .dark -- so they
+     cannot invert out of contrast. */
+  --roast-light: #d4a574;
+  --roast-light-foreground: #2c1810;
+  --roast-medium: #9a5f28;
+  --roast-medium-foreground: #ffffff;
+  --roast-dark: #3e2723;
+  --roast-dark-foreground: #f5f1e8;
   --gold: #d4af37;
   --sand: #e8d5b7;
   --sand-strong: #dcc39c;
@@ -45,6 +65,12 @@
      mode -- these sections must stay dark in both themes. */
   --deep: #3e2723;
   --deep-foreground: #f5f1e8;
+  /* Warm brand highlight for eyebrows, stats and icon chips. Unlike
+     `--accent` (a hover *surface*, which correctly inverts between themes),
+     this sits on dark photography and dark bands that stay dark in BOTH
+     themes -- so it must not invert. Same value in :root and .dark. */
+  --highlight: #d4a574;
+  --highlight-foreground: #2c1810;
   --border: rgba(44, 24, 16, 0.12);
   --input: transparent;
   --input-background: #ffffff;
@@ -98,6 +124,8 @@
   --success: #4ade80;
   --deep: #120b08;
   --deep-foreground: #f5f1e8;
+  --highlight: #d4a574;
+  --highlight-foreground: #2c1810;
   --border: rgba(245, 241, 232, 0.14);
   --input: rgba(245, 241, 232, 0.08);
   --input-background: #241713;
@@ -105,6 +133,12 @@
 
   --copper: #d79355;
   --copper-dark: #b87333;
+  --copper-text: #d79355;
+  /* Dark mode flips the button: a light fill with dark text, which both
+     clears 4.5:1 and stands out against the near-black page. */
+  --cta: #d79355;
+  --cta-foreground: #2c1810;
+  --cta-hover: #e8a86a;
   --sand: #3d271f;
   --sand-strong: #4a3026;
 
@@ -150,6 +184,8 @@
   --color-success: var(--success);
   --color-deep: var(--deep);
   --color-deep-foreground: var(--deep-foreground);
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-input-background: var(--input-background);
@@ -159,6 +195,16 @@
   /* Brand colours as first-class utilities: text-copper, bg-sand, ... */
   --color-copper: var(--copper);
   --color-copper-dark: var(--copper-dark);
+  --color-copper-text: var(--copper-text);
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-cta-hover: var(--cta-hover);
+  --color-roast-light: var(--roast-light);
+  --color-roast-light-foreground: var(--roast-light-foreground);
+  --color-roast-medium: var(--roast-medium);
+  --color-roast-medium-foreground: var(--roast-medium-foreground);
+  --color-roast-dark: var(--roast-dark);
+  --color-roast-dark-foreground: var(--roast-dark-foreground);
   --color-gold: var(--gold);
   --color-sand: var(--sand);
   --color-sand-strong: var(--sand-strong);

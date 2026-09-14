@@ -10,10 +10,10 @@ export function NotFoundPage() {
   return (
     <div className="container-page flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
       <div className="flex h-20 w-20 items-center justify-center rounded-full bg-sand">
-        <Coffee className="h-9 w-9 text-copper" aria-hidden="true" />
+        <Coffee className="h-9 w-9 text-copper-text" aria-hidden="true" />
       </div>
 
-      <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-copper">
+      <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-copper-text">
         Error 404
       </p>
 
@@ -25,7 +25,7 @@ export function NotFoundPage() {
       </p>
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-        <Button asChild size="lg" className="bg-copper text-white hover:bg-copper-dark">
+        <Button asChild size="lg" className="bg-cta text-cta-foreground hover:bg-cta-hover">
           <Link to="/shop">
             Browse the collection
             <ArrowRight className="h-4 w-4" aria-hidden="true" />

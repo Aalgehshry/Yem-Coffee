@@ -34,7 +34,7 @@ export function SectionHeading({
       {eyebrow && (
         <p
           className={cn(
-            'mb-3 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-copper',
+            'mb-3 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-copper-text',
             centered && 'justify-center',
           )}
         >

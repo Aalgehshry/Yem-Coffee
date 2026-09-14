@@ -15,6 +15,37 @@ alone — those files are vendored and should stay close to upstream.
 - `style={{ ... }}` is for genuinely dynamic values only (a computed width, a
   transform). It is not a shortcut around the palette.
 
+### Inverting vs non-inverting tokens
+
+This is the easiest way to break dark mode, so check it before pairing two
+colours:
+
+- **Inverting** tokens are redefined under `.dark` — `primary`, `accent`,
+  `card`, `sand`, `copper`, `primary-foreground`. They are correct for things
+  that sit on the *page*, which changes with the theme.
+- **Non-inverting** tokens are declared once in `:root` — `highlight`, `deep`,
+  `espresso`, `bean`, `gold`, and the `roast-*` set. They are for things that
+  sit on something dark in *both* themes: product photography, the footer, the
+  hero, the story bands.
+
+Never pair one of each. `bg-sand text-bean` looks right in light mode and is
+dark-on-dark in dark mode; so was `bg-espresso text-primary-foreground`.
+
+### Colour by role, not by name
+
+`--copper` is a mid-tone: it does not clear 4.5:1 against either white or
+near-black at body sizes. It is therefore split by job, and the right one must
+be used:
+
+| Token | Use for |
+| --- | --- |
+| `copper` | decorative fills, borders, dividers |
+| `copper-text` | copper as text on a page or card background |
+| `cta` / `cta-foreground` / `cta-hover` | the solid primary button |
+
+Verify any new pair, in both themes, before shipping it. Targets: 4.5:1 for
+body text, 3:1 for large text and UI boundaries.
+
 ## Typography
 
 - `font-display` (Fraunces) for headings and prices; `font-sans` (Inter)

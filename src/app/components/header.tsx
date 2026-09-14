@@ -53,7 +53,7 @@ export function Header() {
       'after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-full after:origin-left',
       'after:bg-copper after:transition-transform after:duration-300 after:content-[""]',
       isActive
-        ? 'text-copper after:scale-x-100'
+        ? 'text-copper-text after:scale-x-100'
         : 'text-foreground/75 hover:text-foreground after:scale-x-0 hover:after:scale-x-100',
     );
 
@@ -80,7 +80,7 @@ export function Header() {
           className="flex items-center gap-2 transition-opacity hover:opacity-80"
           aria-label="Yem Coffee — home"
         >
-          <Coffee className="h-7 w-7 text-copper" aria-hidden="true" />
+          <Coffee className="h-7 w-7 text-copper-text" aria-hidden="true" />
           <span className="font-display text-xl font-semibold text-primary">Yem Coffee</span>
         </Link>
 
@@ -160,7 +160,12 @@ export function Header() {
                 className={({ isActive }) =>
                   cn(
                     'rounded-lg px-3 py-3 text-base font-medium transition-colors',
-                    isActive ? 'bg-sand text-copper' : 'text-foreground hover:bg-sand/50',
+                    // Copper text on the sand chip only reaches 3.6:1, so the
+                    // active state is carried by the bar and the fill while
+                    // the label keeps full-contrast foreground colour.
+                    isActive
+                      ? 'border-l-2 border-copper bg-sand text-foreground'
+                      : 'border-l-2 border-transparent text-foreground hover:bg-sand/50',
                   )
                 }
               >

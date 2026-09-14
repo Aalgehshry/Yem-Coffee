@@ -98,8 +98,8 @@ export function HomePage() {
 
         <div className="container-page py-20">
           <div className="max-w-2xl text-white">
-            <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-accent">
-              <span aria-hidden="true" className="h-px w-10 bg-accent/60" />
+            <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-highlight">
+              <span aria-hidden="true" className="h-px w-10 bg-highlight/60" />
               The birthplace of coffee
             </p>
 
@@ -117,7 +117,7 @@ export function HomePage() {
               <Button
                 asChild
                 size="lg"
-                className="h-12 bg-copper px-7 text-base text-white hover:bg-copper-dark"
+                className="h-12 bg-cta px-7 text-base text-cta-foreground hover:bg-cta-hover"
               >
                 <Link to="/shop">
                   Shop the collection
@@ -144,7 +144,7 @@ export function HomePage() {
               {HERO_STATS.map((stat) => (
                 <div key={stat.label}>
                   <dt className="sr-only">{stat.label}</dt>
-                  <dd className="font-display text-2xl font-semibold text-accent">
+                  <dd className="font-display text-2xl font-semibold text-highlight">
                     {stat.value}
                   </dd>
                   <p aria-hidden="true" className="mt-0.5 text-xs uppercase tracking-[0.12em] text-white/60">
@@ -163,8 +163,8 @@ export function HomePage() {
           <ul className="grid grid-cols-1 gap-8 md:grid-cols-3">
             {TRUST_BADGES.map(({ Icon, title, description }) => (
               <li key={title} className="flex items-center gap-4">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent">
-                  <Icon className="h-6 w-6 text-bean" aria-hidden="true" />
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-highlight">
+                  <Icon className="h-6 w-6 text-highlight-foreground" aria-hidden="true" />
                 </span>
                 <div>
                   <h3 className="font-semibold">{title}</h3>
@@ -207,8 +207,8 @@ export function HomePage() {
       <section className="bg-deep py-20 text-deep-foreground">
         <div className="container-page grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-              <span aria-hidden="true" className="h-px w-8 bg-accent/60" />
+            <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-highlight">
+              <span aria-hidden="true" className="h-px w-8 bg-highlight/60" />
               From the terraces
             </p>
             <h2 className="mt-4 text-balance text-3xl sm:text-4xl">
@@ -228,7 +228,7 @@ export function HomePage() {
               ].map(({ Icon, text }) => (
                 <li key={text} className="flex items-center gap-3">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-deep-foreground/10">
-                    <Icon className="h-4 w-4 text-accent" aria-hidden="true" />
+                    <Icon className="h-4 w-4 text-highlight" aria-hidden="true" />
                   </span>
                   <span className="text-sm text-deep-foreground/85">{text}</span>
                 </li>
@@ -238,7 +238,7 @@ export function HomePage() {
             <Button
               asChild
               size="lg"
-              className="mt-9 h-12 bg-accent px-7 text-base text-bean hover:bg-accent/90"
+              className="mt-9 h-12 bg-highlight px-7 text-base text-highlight-foreground hover:bg-highlight/90"
             >
               <Link to="/about">
                 Read our story

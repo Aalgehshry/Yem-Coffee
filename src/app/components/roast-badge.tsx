@@ -8,11 +8,17 @@ import { cn } from './ui/utils';
  * made it impossible to scan a grid for a light roast. The colours run light →
  * dark to match the thing they describe, and the bean glyphs mean the badge is
  * still readable without relying on colour alone.
+ *
+ * Every pair here is deliberately built from NON-inverting tokens. The badge
+ * sits on product photography, which looks the same in both themes, so a token
+ * that flips with the theme would destroy the contrast in one of them —
+ * `bg-sand text-bean` was dark-on-dark in dark mode, and so was
+ * `bg-espresso text-primary-foreground`.
  */
 const ROAST_STYLES: Record<RoastLevel, { className: string; beans: string }> = {
-  Light: { className: 'bg-sand text-bean', beans: '●○○' },
-  Medium: { className: 'bg-copper text-white', beans: '●●○' },
-  Dark: { className: 'bg-espresso text-primary-foreground', beans: '●●●' },
+  Light: { className: 'bg-roast-light text-roast-light-foreground', beans: '●○○' },
+  Medium: { className: 'bg-roast-medium text-roast-medium-foreground', beans: '●●○' },
+  Dark: { className: 'bg-roast-dark text-roast-dark-foreground', beans: '●●●' },
 };
 
 interface RoastBadgeProps {

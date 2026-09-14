@@ -206,7 +206,7 @@ export function ShopPage() {
               variant="link"
               size="sm"
               onClick={clearFilters}
-              className="h-auto p-0 text-copper"
+              className="h-auto p-0 text-copper-text"
             >
               Clear all
             </Button>
@@ -230,7 +230,7 @@ export function ShopPage() {
       ) : (
         <div className="mt-6 rounded-xl border border-dashed border-border bg-card/50 px-6 py-20 text-center">
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-sand">
-            <Search className="h-6 w-6 text-copper" aria-hidden="true" />
+            <Search className="h-6 w-6 text-copper-text" aria-hidden="true" />
           </div>
           <h2 className="mt-5 text-xl">No coffees match those filters</h2>
           <p className="mx-auto mt-2 max-w-sm text-sm text-muted-foreground">

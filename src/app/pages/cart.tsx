@@ -32,7 +32,7 @@ export function CartPage() {
     return (
       <div className="container-page flex min-h-[60vh] flex-col items-center justify-center py-20 text-center">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-sand">
-          <ShoppingBag className="h-9 w-9 text-copper" aria-hidden="true" />
+          <ShoppingBag className="h-9 w-9 text-copper-text" aria-hidden="true" />
         </div>
 
         <h1 className="mt-8 text-4xl text-primary">Your cart is empty</h1>
@@ -44,7 +44,7 @@ export function CartPage() {
         <Button
           asChild
           size="lg"
-          className="mt-8 h-12 bg-copper px-7 text-base text-white hover:bg-copper-dark"
+          className="mt-8 h-12 bg-cta px-7 text-base text-cta-foreground hover:bg-cta-hover"
         >
           <Link to="/shop">Start shopping</Link>
         </Button>
@@ -122,7 +122,7 @@ export function CartPage() {
                         <div className="min-w-0">
                           <Link
                             to={`/product/${item.id}`}
-                            className="text-lg font-semibold hover:text-copper hover:underline"
+                            className="text-lg font-semibold hover:text-copper-text hover:underline"
                           >
                             {item.name}
                           </Link>
@@ -155,7 +155,7 @@ export function CartPage() {
                           // the deliberate way to remove a line.
                           onChange={(quantity) => updateQuantity(item.id, quantity)}
                         />
-                        <span className="tabular-price text-lg font-semibold text-copper">
+                        <span className="tabular-price text-lg font-semibold text-copper-text">
                           {formatPrice(item.price * item.quantity)}
                         </span>
                       </div>
@@ -180,7 +180,7 @@ export function CartPage() {
                 {totals.amountToFreeShipping > 0 ? (
                   <>
                     <p className="flex items-center gap-2 text-sm">
-                      <Truck className="h-4 w-4 text-copper" aria-hidden="true" />
+                      <Truck className="h-4 w-4 text-copper-text" aria-hidden="true" />
                       <span>
                         <strong className="tabular-price">
                           {formatPrice(totals.amountToFreeShipping)}
@@ -224,7 +224,7 @@ export function CartPage() {
 
                 <div className="flex items-baseline justify-between text-lg font-semibold">
                   <dt>Total</dt>
-                  <dd className="tabular-price text-copper">
+                  <dd className="tabular-price text-copper-text">
                     {formatPrice(totals.total)}
                   </dd>
                 </div>
@@ -233,7 +233,7 @@ export function CartPage() {
               <Button
                 size="lg"
                 onClick={() => setIsConfirmingCheckout(true)}
-                className="mt-6 h-12 w-full bg-copper text-base text-white hover:bg-copper-dark"
+                className="mt-6 h-12 w-full bg-cta text-base text-cta-foreground hover:bg-cta-hover"
               >
                 Proceed to checkout
               </Button>
@@ -267,7 +267,7 @@ export function CartPage() {
             <AlertDialogCancel>Keep shopping</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleCheckout}
-              className="bg-copper text-white hover:bg-copper-dark"
+              className="bg-cta text-cta-foreground hover:bg-cta-hover"
             >
               Place demo order
             </AlertDialogAction>

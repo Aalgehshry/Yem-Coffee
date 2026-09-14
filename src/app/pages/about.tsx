@@ -56,10 +56,10 @@ export function AboutPage() {
       {/* --------------------------------------------------------------- Hero */}
       <section className="border-b border-border/50 bg-deep py-20 text-deep-foreground">
         <div className="container-page text-center">
-          <p className="flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-accent">
-            <span aria-hidden="true" className="h-px w-10 bg-accent/60" />
+          <p className="flex items-center justify-center gap-3 text-xs font-semibold uppercase tracking-[0.24em] text-highlight">
+            <span aria-hidden="true" className="h-px w-10 bg-highlight/60" />
             Since the 15th century
-            <span aria-hidden="true" className="h-px w-10 bg-accent/60" />
+            <span aria-hidden="true" className="h-px w-10 bg-highlight/60" />
           </p>
 
           <h1 className="mt-5 text-balance text-5xl sm:text-6xl">Our story</h1>
@@ -125,8 +125,8 @@ export function AboutPage() {
                 className="border-border/60 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)]"
               >
                 <CardContent className="p-8 text-center">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent">
-                    <Icon className="h-8 w-8 text-bean" aria-hidden="true" />
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-highlight">
+                    <Icon className="h-8 w-8 text-highlight-foreground" aria-hidden="true" />
                   </div>
                   <h3 className="mt-5 text-xl">{title}</h3>
                   <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground">
@@ -158,7 +158,7 @@ export function AboutPage() {
           <ol className="mx-auto mt-12 grid max-w-4xl gap-8 md:grid-cols-3">
             {TIMELINE.map((entry) => (
               <li key={entry.period} className="border-t-2 border-copper/40 pt-5">
-                <p className="font-display text-lg font-semibold text-copper">
+                <p className="font-display text-lg font-semibold text-copper-text">
                   {entry.period}
                 </p>
                 <p className="mt-2 text-pretty text-sm leading-relaxed text-foreground/75">
@@ -180,7 +180,7 @@ export function AboutPage() {
           <Button
             asChild
             size="lg"
-            className="mt-8 h-12 bg-copper px-7 text-base text-white hover:bg-copper-dark"
+            className="mt-8 h-12 bg-cta px-7 text-base text-cta-foreground hover:bg-cta-hover"
           >
             <Link to="/shop">
               Browse the collection
