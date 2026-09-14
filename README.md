@@ -1,84 +1,110 @@
-# The Yemeni Museum Review
+# Yem Coffee
 
-A bilingual (English / Arabic) digital magazine celebrating Yemen's cultural
-heritage — read by **turning pages sideways** instead of scrolling. Six spreads
-take the reader from a cover and editorial through featured collections, a
-historical timeline, an interactive map, and visitor information.
+A front-end e-commerce storefront for Yemeni specialty coffee — browse a
+single-origin catalogue, filter it by roast, read tasting notes, and check out
+through a cart that survives a refresh.
 
-Built from scratch in **vanilla HTML, CSS, and JavaScript** — no framework, no
-build step — with full **right-to-left (RTL)** support and a clean,
-content-driven internationalization layer.
+Built with **React + TypeScript + Vite**, styled with **Tailwind CSS v4** design
+tokens, on top of **shadcn/ui** (Radix) primitives.
 
-<!-- Replace with your deployed link once it's live on Vercel / Netlify / GitHub Pages -->
-🔗 **Live demo:** _add link here_
-📸 **Preview:** _add a screenshot or short GIF here_
+🔗 **Live demo:** <https://yem-coffee.vercel.app>
 
 ---
 
 ## Highlights
 
-- **Fully bilingual (EN / AR)** with a live language switch — every translatable
-  element is driven by a `data-i18n` key, so text is never hard-coded in the markup.
-- **True RTL layout**, not just mirrored text — spacing, alignment, and reading
-  direction adapt when Arabic is active.
-- **Horizontal, page-turning interface** instead of a vertical scroll, mimicking
-  a printed magazine.
-- **Content-driven architecture** — collection cards, timeline eras, and map
-  markers are all generated from arrays in one file, so adding a card means
-  adding one object, not copying a block of HTML.
-- **Zero dependencies** — opens and runs with nothing to install.
-- Includes a small **Python tool** that compresses images and flags unused ones.
+- **A real design system, not scattered hex codes.** The whole palette —
+  copper, gold, sand, espresso — lives as CSS custom properties in
+  `src/styles/theme.css` and is exposed to Tailwind as utilities
+  (`text-copper`, `bg-sand`), so the brand can be retuned in one file.
+- **Shareable, bookmarkable filters.** Shop filters live in the URL
+  (`/shop?roast=light&q=jasmine`), so a filtered view can be linked and the back
+  button undoes a filter instead of leaving the page.
+- **A cart that remembers.** Cart state is a reducer mirrored to
+  `localStorage`, guarded so that corrupt or blocked storage degrades to an
+  empty cart rather than a white screen.
+- **Accessible by construction.** Skip link, labelled icon buttons, a live
+  region for filter results, `aria-expanded` on the mobile menu, visible focus
+  rings, and a `prefers-reduced-motion` escape hatch.
+- **Typed end to end** — `npm run build` type-checks before it bundles.
 
 ## Tech stack
 
-| Concern            | Choice                                    |
-| ------------------ | ----------------------------------------- |
-| Markup             | Semantic HTML5                            |
-| Styling            | CSS3 (custom properties, RTL-aware layout)|
-| Behaviour          | Vanilla JavaScript (no framework)         |
-| Internationalization | Custom `data-i18n` system, content in JS |
-| Tooling            | Python (image compression / cleanup)      |
+| Concern    | Choice                                     |
+| ---------- | ------------------------------------------ |
+| Framework  | React 18 + TypeScript (strict)              |
+| Build      | Vite 6                                      |
+| Styling    | Tailwind CSS v4 with CSS custom properties  |
+| Components | shadcn/ui on Radix primitives               |
+| Routing    | React Router 7                              |
+| Icons      | lucide-react                                |
+| Toasts     | sonner                                      |
+| Typography | Fraunces (display) + Inter (UI)             |
+
+## Getting started
+
+```bash
+npm install
+npm run dev
+```
+
+Then open <http://localhost:5173>.
+
+| Script              | What it does                              |
+| ------------------- | ----------------------------------------- |
+| `npm run dev`       | Vite dev server with HMR                  |
+| `npm run build`     | Type-check, then build to `dist/`         |
+| `npm run typecheck` | `tsc --noEmit` on its own                 |
+| `npm run preview`   | Serve the production build locally        |
 
 ## Project structure
 
 ```
-index.html          page structure — the six spreads and the nav bar
-css/style.css       all styling, ordered spread by spread
-js/content.js       ALL text and photo choices, in both languages
-js/main.js          behaviour only: page turning, language switch, interactions
-images/             photos used by the site
-images/_originals/  untouched copies, kept so photos can be re-compressed safely
-tools/images.py     compresses photos and finds unused ones
+index.html                    document shell, meta tags, font <link>
+vercel.json                   SPA rewrite so deep links resolve on Vercel
+src/main.tsx                  React entry point
+src/app/App.tsx               routes, providers, page chrome
+src/app/types/product.ts      Product / CartItem domain types
+src/app/data/products.ts      the catalogue + its query helpers
+src/app/context/cart-context  cart reducer, totals, localStorage persistence
+src/app/lib/constants.ts      tax rate, shipping thresholds, storage key
+src/app/lib/format.ts         price / weight / plural formatting
+src/app/components/           shared components (product card, footer, …)
+src/app/components/ui/        shadcn/ui primitives
+src/app/pages/                one file per route
+src/styles/theme.css          design tokens + base layer
 ```
 
-## How the two languages work
+## How the pieces fit
 
-Every translatable element carries a `data-i18n` attribute naming its text:
+**Design tokens.** `theme.css` declares the palette on `:root`, overrides it
+under `.dark`, and re-exports it through Tailwind's `@theme inline` block.
+Components then use `text-copper` rather than `style={{ color: '#B87333' }}`,
+which is what makes the dark theme a palette swap instead of a rewrite.
 
-```html
-<h2 data-i18n="collTitle"></h2>
-```
+**One product card.** `ProductCard` is used by the home page, the shop grid and
+the related-products strip. The link sits on the product name and is stretched
+across the card with `after:absolute`, so the card is fully clickable while the
+quick-add control stays a real, focusable `<button>` — impossible when the
+whole card is wrapped in an anchor.
 
-On load — and again whenever the language is switched — `main.js` fills each of
-those elements from `js/content.js`. Content and presentation stay separate, so
-translating or editing copy never means touching the layout.
+**Cart totals.** Subtotal, tax, shipping and the free-shipping gap are all
+derived in one memoised place in the cart context, so nothing on the page can
+disagree with anything else about the number.
 
-## Running it locally
+## Deploying
 
-It needs to be served over HTTP (opening `index.html` directly won't load the
-stylesheet and scripts correctly in every browser):
+The app is a static SPA. `vercel.json` rewrites every path to `index.html` so
+that loading `/shop` directly returns the app rather than a 404.
 
 ```bash
-python -m http.server 8843
+npm run build   # → dist/
 ```
 
-Then visit <http://localhost:8843>.
+## Credits
 
-## Why I built it
-
-A personal project connecting my Yemeni heritage with front-end craft — an
-excuse to go deep on bilingual/RTL interfaces, a content-driven architecture,
-and a reading experience that breaks away from the default vertical scroll.
+Photography from [Unsplash](https://unsplash.com); UI primitives from
+[shadcn/ui](https://ui.shadcn.com). See [ATTRIBUTIONS.md](ATTRIBUTIONS.md).
 
 ---
 

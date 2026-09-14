@@ -1,61 +1,81 @@
-**Add your own guidelines here**
-<!--
+# Yem Coffee — code & design guidelines
 
-System Guidelines
+Short rules that keep this codebase consistent. When something here conflicts
+with a shadcn/ui primitive in `src/app/components/ui/`, leave the primitive
+alone — those files are vendored and should stay close to upstream.
 
-Use this file to provide the AI with rules and guidelines you want it to follow.
-This template outlines a few examples of things you can add. You can add your own sections and format it to suit your needs
+## Colour
 
-TIP: More context isn't always better. It can confuse the LLM. Try and add the most important rules you need
+- **Never write a hex value in a component.** Every colour is a token in
+  `src/styles/theme.css`, surfaced as a Tailwind utility: `text-copper`,
+  `bg-sand`, `bg-espresso`, `text-gold`, plus the semantic set (`bg-card`,
+  `text-muted-foreground`, `border-border`).
+- Adding a colour means adding it in three places in `theme.css`: the `:root`
+  value, the `.dark` override, and the `@theme inline` mapping.
+- `style={{ ... }}` is for genuinely dynamic values only (a computed width, a
+  transform). It is not a shortcut around the palette.
 
-# General guidelines
+## Typography
 
-Any general rules you want the AI to follow.
-For example:
+- `font-display` (Fraunces) for headings and prices; `font-sans` (Inter)
+  everywhere else. Headings already default to the display face.
+- Prices, quantities and totals get `tabular-price` so digits do not jitter as
+  the value changes.
+- Long-form copy gets `text-pretty`; headings get `text-balance`.
 
-* Only use absolute positioning when necessary. Opt for responsive and well structured layouts that use flexbox and grid by default
-* Refactor code as you go to keep code clean
-* Keep file sizes small and put helper functions and components in their own files.
+## Layout
 
---------------
+- Page-level gutters come from `container-page`, not a hand-rolled
+  `container mx-auto px-4 sm:px-6 lg:px-8`.
+- Prefer flex/grid over absolute positioning. Absolute is for overlays
+  (scrims, badges pinned to an image corner) only.
+- Mobile first: write the small-screen layout, then add `sm:` / `md:` / `lg:`.
 
-# Design system guidelines
-Rules for how the AI should make generations look like your company's design system
+## Components
 
-Additionally, if you select a design system to use in the prompt box, you can reference
-your design system's components, tokens, variables and components.
-For example:
+- If the same block of JSX appears on a second page, extract it. `ProductCard`,
+  `QuantityStepper`, `SectionHeading` and `RoastBadge` all exist because the
+  markup had already been copied two or three times and drifted apart.
+- Content that repeats in a layout (trust badges, footer links, reviews) goes
+  in a module-level array and gets mapped, so a layout change is one edit.
+- Keep formatting in `lib/format.ts` and magic numbers in `lib/constants.ts`.
+  A tax rate or a currency symbol should never be typed into JSX.
 
-* Use a base font-size of 14px
-* Date formats should always be in the format “Jun 10”
-* The bottom toolbar should only ever have a maximum of 4 items
-* Never use the floating action button with the bottom toolbar
-* Chips should always come in sets of 3 or more
-* Don't use a dropdown if there are 2 or fewer options
+## Accessibility
 
-You can also create sub sections and add more specific details
-For example:
+These are requirements, not nice-to-haves:
 
+- Every icon-only button needs an `aria-label`; every decorative icon and
+  gradient needs `aria-hidden="true"`.
+- Never nest a `<button>` inside an `<a>`. To make a card clickable, put the
+  link on the title and stretch it with `after:absolute after:inset-0`.
+- Images need a real `alt`, or `alt=""` plus `aria-hidden` when decorative.
+- Content that changes in place (result counts, quantities) needs `aria-live`.
+- Anything interactive must be reachable and visible on keyboard focus.
+- New animation must survive `prefers-reduced-motion: reduce` — the base layer
+  neutralises durations, so do not rely on a transition to reveal content.
 
-## Button
-The Button component is a fundamental interactive element in our design system, designed to trigger actions or navigate
-users through the application. It provides visual feedback and clear affordances to enhance user experience.
+## Images
 
-### Usage
-Buttons should be used for important actions that users need to take, such as form submissions, confirming choices,
-or initiating processes. They communicate interactivity and should have clear, action-oriented labels.
+- Above-the-fold images: `fetchPriority="high"`, no `loading="lazy"`.
+- Everything below: `loading="lazy" decoding="async"`.
+- Remote product photography goes through `ImageWithFallback`, so a dead URL
+  renders a branded placeholder rather than a broken-image icon.
 
-### Variants
-* Primary Button
-  * Purpose : Used for the main action in a section or page
-  * Visual Style : Bold, filled with the primary brand color
-  * Usage : One primary button per section to guide users toward the most important action
-* Secondary Button
-  * Purpose : Used for alternative or supporting actions
-  * Visual Style : Outlined with the primary color, transparent background
-  * Usage : Can appear alongside a primary button for less important actions
-* Tertiary Button
-  * Purpose : Used for the least important actions
-  * Visual Style : Text-only with no border, using primary color
-  * Usage : For actions that should be available but not emphasized
--->
+## State
+
+- Filters and other view state that a user might want to share or undo belong
+  in the URL (`useSearchParams`), not `useState`.
+- Cart mutations go through the reducer in `context/cart-context.tsx`. Add an
+  action there rather than reaching around it.
+- Derive; do not duplicate. Totals come from `totals` in the cart context so
+  two parts of the page cannot disagree about a number.
+
+## Before committing
+
+```bash
+npm run typecheck
+npm run build
+```
+
+Both must pass. `strict` is on and stays on.
