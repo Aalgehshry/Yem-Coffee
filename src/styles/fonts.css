@@ -1,0 +1,30 @@
+/**
+ * Typeface setup.
+ *
+ * The font files themselves are requested from a <link> in index.html rather
+ * than an @import here: a stylesheet @import is only discovered *after* the
+ * bundled CSS has downloaded and parsed, which costs an extra round trip on
+ * the critical path. The families are:
+ *
+ *   Fraunces – high-contrast display serif, used for headings and prices.
+ *              Variable on an optical-size axis, so it stays readable small
+ *              and gets more character at hero sizes.
+ *   Inter    – neutral UI sans, used for body copy, controls and labels.
+ *
+ * The family names are wired into Tailwind via `--font-display` / `--font-sans`
+ * in theme.css.
+ */
+
+:root {
+  font-optical-sizing: auto;
+}
+
+/* Fraunces' default figures are proportional, which makes prices wobble as the
+   digits change. Headings and prices opt into lining figures instead. */
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-variant-numeric: lining-nums;
+}
